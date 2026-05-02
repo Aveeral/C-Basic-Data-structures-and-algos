@@ -30,6 +30,7 @@ Node* createTree() {
 
 }
 
+// Different Traversals Inorder,postorer,preorder
 void Inorder(Node* root) {
     if(root == NULL){
         return;
@@ -38,6 +39,25 @@ void Inorder(Node* root) {
      cout << root-> data << " ";
      Inorder(root->right);
 }
+
+void Postorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+    Postorder(root->left);
+    Postorder(root->right);
+    cout << root->data << " ";
+}
+
+void Preorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+    cout << root-> data << " ";
+    Preorder(root->left);
+    Preorder(root->right);
+}
+
 
 int main(){
     Node* root = NULL;
