@@ -15,6 +15,7 @@ public:
     }
 };
 
+// INSERTION IN BINARY TREE
 Node* createBST(Node* root, int value)
 {
     // Base case
@@ -49,6 +50,25 @@ void inorder(Node* root)
     inorder(root->right);
 }
 
+// SEARCHING IN BST
+
+  bool Search(Node*root,int key){
+    if(root == NULL){
+        return false;
+    }
+
+    if(root->data == key){
+        return true;
+    }
+    else if(key<root->data){
+        return Search(root->left,key);
+    }
+    else{
+        return Search(root->right,key);
+    }
+    
+  }
+
 int main()
 {
     Node* root = NULL;
@@ -65,6 +85,13 @@ int main()
 
         root = createBST(root, value);
     }
+
+    cout << "Searching a key\n";
+    int key = -1;
+    cout<< "ENTER THE VALUE OF KEY: ";
+    cin >> key;
+    cout << Search(root,key);
+
 
     cout << "\nINORDER TRAVERSAL: ";
     inorder(root);
