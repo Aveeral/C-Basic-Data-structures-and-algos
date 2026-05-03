@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-// Implementation Using Linked List 
+// Queue Implementation Using Linked List
 
 struct Node {
     int data;
@@ -9,68 +9,92 @@ struct Node {
 };
 
 int MAX = 100;
+
 Node* front = NULL;
 Node* rear = NULL;
-int size =0;
 
-bool isFull(){
-    if(size == MAX){
-        return true;
-    }
-    return false;
-}
-bool isEmpty(){
-    if(size == 0){
-        return true;
-    }
-    return false;
+int size = 0;
+
+bool isFull() {
+    return size == MAX;
 }
 
-void Enqueue(int value){
-    if(isFull()){
-        cout << "THE QUEUE IS ALREADY FULL";
+bool isEmpty() {
+    return size == 0;
+}
+
+void Enqueue(int value) {
+
+    if(isFull()) {
+        cout << "THE QUEUE IS ALREADY FULL\n";
+        return;
     }
+
     Node* newNode = new Node();
+
     newNode->data = value;
-    if(size == 0){ 
-       front = newNode;
-       rear = newNode;
+    newNode->next = NULL;
+
+    // First node
+    if(size == 0) {
+        front = rear = newNode;
+    }
+    else {
+        rear->next = newNode;
+        rear = newNode;
     }
 
-    rear->next = newNode;
-    rear = newNode;
     size++;
-    return;
 }
 
-void Dequeue(){
-    if(isEmpty()){
-        cout << "THE QUEUE IS ALREADY EMPTY";
+void Dequeue() {
+
+    if(isEmpty()) {
+        cout << "THE QUEUE IS ALREADY EMPTY\n";
+        return;
     }
-    Node* temp = front;
-    front = temp->next;
-    delete temp;
+
+    // Only one node
+    if(front == rear) {
+        delete front;
+        front = rear = NULL;
+    }
+    else {
+        Node* temp = front;
+        front = front->next;
+        delete temp;
+    }
+
     size--;
-    return;
 }
 
-int Peak(){
-    if(isEmpty()){
+int Peek() {
+
+    if(isEmpty()) {
         return -1;
     }
+
     return front->data;
 }
 
-void Display(){
+void Display() {
+
+    if(isEmpty()) {
+        cout << "QUEUE IS EMPTY\n";
+        return;
+    }
+
     Node* temp = front;
-    while(temp != NULL){
+
+    while(temp != NULL) {
         cout << temp->data << " ";
         temp = temp->next;
     }
-    return;
+
+    cout << endl;
 }
 
-int main(){
+int main() {
 
     Enqueue(12);
     Enqueue(13);
@@ -78,12 +102,15 @@ int main(){
     Enqueue(15);
     Enqueue(16);
     Enqueue(17);
+
     Dequeue();
     Dequeue();
-    
-    cout << size << "\n";
+
+    cout << "SIZE: " << size << endl;
+
+    cout << "FRONT ELEMENT: " << Peek() << endl;
+
     Display();
-    
 
-
+    return 0;
 }
