@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+// Implementation Of queues using Arrays
 int  MAX=100;
 int arr[100];
 
@@ -26,6 +26,7 @@ void Dequeue(){
         cout << "THE QUEUE IS EMPTY";
     }
     front++;
+    size--;
 }
 
 int Peek(){
